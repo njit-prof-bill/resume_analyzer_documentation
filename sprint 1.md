@@ -51,7 +51,7 @@
 
 ## 1.2 User Registration, Authentication, and Session Management
 
-### **Task 4**: Implement User Sign-Up Endpoint (API) Using FastAPI
+### **Task 4**: Implement User Sign-Up Endpoint (API) Use FastAPI if Python
 - **Description**:
   - Create a registration endpoint.
 - **Instructions**:
