@@ -127,9 +127,9 @@ Here are the in-depth technical specifications for **items 1.3 (Resume and Job D
      - URL: `POST /api/resume-upload`
      - Expected Content-Type: `multipart/form-data`
      - Request:
-       - `resume_file`: File field for uploading a PDF.
+       - `resume_file`: File field for uploading a PDF or docx.
      - Backend Logic:
-       - Check the file type to confirm it’s a PDF (e.g., MIME type `application/pdf`).
+       - Check the file type to confirm it’s a PDF (e.g., MIME type `application/pdf`) or docx.
        - Validate the file size (should not exceed 2MB).
        - Temporarily store the file in memory or process it directly (no persistence required).
      - Response:
