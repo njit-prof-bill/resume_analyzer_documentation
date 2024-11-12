@@ -22,6 +22,7 @@
      - Project name, description, team members, and contact info.
      - High-level project overview and goals.
      - Instructions on setting up the project locally.
+  4. Invite the professor as a collaborator to your repository.
 - **Unit Tests**: None required, but ensure all team members can access and clone the repository.
 
 ---
