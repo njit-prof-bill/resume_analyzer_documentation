@@ -531,3 +531,161 @@
   - Use Jest and React Testing Library (if React) or Vue Test Utils (if Vue.js).
 
 ---
+
+## **2.4 Final Testing and Debugging**
+
+---
+
+### **Task 29**: Perform End-to-End Testing of the Application, Covering the Entire Workflow
+
+- **Objective**:
+  - Validate that the entire application workflow functions as intended, from user registration to feedback display.
+
+- **Technical Details**:
+  1. **Test Scenarios**:
+     - Cover the following key user stories:
+       - **User Registration**:
+         - New users can register with a valid email, username, and password.
+       - **User Login**:
+         - Registered users can log in with correct credentials and are redirected to the dashboard.
+       - **Resume Upload and Job Description Submission**:
+         - Users can upload a valid PDF resume and paste a job description for analysis.
+       - **Fit Score and Feedback Display**:
+         - The dashboard displays the correct fit score and feedback after analysis.
+       - **Report Download**:
+         - Users can generate and download a PDF report of their analysis results.
+  2. **Test Cases**:
+     - **Positive Tests**:
+       - Valid inputs for all endpoints.
+       - Proper API responses for all user actions.
+     - **Negative Tests**:
+       - Invalid file types or oversized uploads.
+       - Missing or invalid inputs for any endpoint.
+       - Unauthorized access to protected routes (e.g., dashboard without login).
+  3. **Automation Tools**:
+     - Use a testing framework like **Playwright** or **Cypress** for frontend E2E tests.
+     - Use **Postman** or **Pytest** for backend API testing.
+  4. **Example Automated Test Workflow**:
+     - **Registration Test**:
+       ```javascript
+       test('User can register successfully', async () => {
+           await page.goto('http://localhost:3000/register');
+           await page.fill('#email', 'test@example.com');
+           await page.fill('#username', 'testuser');
+           await page.fill('#password', 'TestPassword123');
+           await page.fill('#confirm-password', 'TestPassword123');
+           await page.click('button[type="submit"]');
+           expect(await page.textContent('.success')).toBe('Registration successful');
+       });
+       ```
+     - **Backend API Test (Pytest)**:
+       ```python
+       def test_login_endpoint(client):
+           response = client.post("/api/login", json={
+               "email": "test@example.com",
+               "password": "TestPassword123"
+           })
+           assert response.status_code == 200
+           assert "token" in response.json()
+       ```
+
+- **Unit Tests**:
+  - Ensure 80–90% code coverage for all major components (frontend and backend).
+  - Write additional tests to address uncovered lines or edge cases.
+
+---
+
+### **Task 30**: Write Project Documentation (Setup Guide, Usage Instructions, API Documentation)
+
+- **Objective**:
+  - Provide comprehensive documentation to guide users and developers in understanding, setting up, and using the application.
+
+- **Technical Details**:
+  1. **Setup Guide (`SETUP.md`)**:
+     - Include:
+       - **System Requirements**:
+         - Node.js version, Python version, and any required dependencies.
+       - **Installation Instructions**:
+         ```bash
+         git clone https://github.com/example/resume-analyzer.git
+         cd resume-analyzer/backend
+         pip install -r requirements.txt
+         cd ../frontend
+         npm install
+         ```
+       - **Running the Application**:
+         ```bash
+         # Backend
+         uvicorn main:app --reload
+         # Frontend
+         npm run dev
+         ```
+  2. **Usage Instructions (`README.md`)**:
+     - Include:
+       - Application overview and key features.
+       - Step-by-step guide for:
+         - Registering and logging in.
+         - Uploading a resume and submitting a job description.
+         - Viewing analysis results and downloading a report.
+  3. **API Documentation**:
+     - Use a tool like **Swagger** (FastAPI integration) or **Postman Collections**.
+     - Document all endpoints with:
+       - **Method**: GET/POST
+       - **URL**: Endpoint URL
+       - **Request Body**: JSON format with required/optional fields.
+       - **Response Body**: JSON format with sample success/error responses.
+     - Example API Documentation:
+       ```
+       POST /api/fit-score
+       Request:
+       {
+         "resume_text": "Resume content...",
+         "job_description": "Job description..."
+       }
+       Response:
+       {
+         "fit_score": 85,
+         "feedback": ["Include AWS experience", "Add REST API projects"]
+       }
+       ```
+
+- **Unit Tests**:
+  - Validate all setup instructions on a clean environment to ensure correctness.
+  - Review API documentation for completeness and accuracy.
+
+---
+
+### **Task 31**: Conduct a Final Code Review and Refactoring Session to Improve Code Quality
+
+- **Objective**:
+  - Review the codebase to ensure it meets quality standards, and refactor as needed to improve maintainability and performance.
+
+- **Technical Details**:
+  1. **Code Review Checklist**:
+     - **Readability**:
+       - Code is well-commented and uses meaningful variable/function names.
+     - **Consistency**:
+       - Adheres to the defined coding standards in `STYLE_GUIDE.md`.
+     - **Performance**:
+       - Ensure efficient use of resources (e.g., avoid redundant API calls).
+     - **Security**:
+       - Verify that sensitive data (e.g., passwords, API keys) is handled securely.
+     - **Error Handling**:
+       - Ensure robust error handling for all API endpoints and frontend interactions.
+  2. **Refactoring Opportunities**:
+     - Identify and eliminate duplicate code.
+     - Modularize large functions into smaller, reusable components.
+     - Optimize queries or API calls for better performance.
+  3. **Peer Review Process**:
+     - Assign two team members to review each pull request.
+     - Use comments to suggest improvements or approve changes.
+  4. **Tooling**:
+     - Use **ESLint/Prettier** (for JavaScript) or **Black/Flake8** (for Python) to enforce code style.
+     - Integrate tools like **SonarQube** for static code analysis.
+
+- **Unit Tests**:
+  - Validate that all test cases pass after refactoring.
+  - Ensure no new bugs are introduced during the refactoring process.
+
+---
+
