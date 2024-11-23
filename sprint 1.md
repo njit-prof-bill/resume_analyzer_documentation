@@ -22,6 +22,7 @@
      - Project name, description, team members, and contact info.
      - High-level project overview and goals.
      - Instructions on setting up the project locally.
+  4. Invite the professor as a collaborator to your repository.
 - **Unit Tests**: None required, but ensure all team members can access and clone the repository.
 
 ---
@@ -50,7 +51,7 @@
 
 ## 1.2 User Registration, Authentication, and Session Management
 
-### **Task 4**: Implement User Sign-Up Endpoint (API) Using FastAPI
+### **Task 4**: Implement User Sign-Up Endpoint (API) Use FastAPI if Python
 - **Description**:
   - Create a registration endpoint.
 - **Instructions**:
@@ -126,9 +127,9 @@ Here are the in-depth technical specifications for **items 1.3 (Resume and Job D
      - URL: `POST /api/resume-upload`
      - Expected Content-Type: `multipart/form-data`
      - Request:
-       - `resume_file`: File field for uploading a PDF.
+       - `resume_file`: File field for uploading a PDF or docx.
      - Backend Logic:
-       - Check the file type to confirm it’s a PDF (e.g., MIME type `application/pdf`).
+       - Check the file type to confirm it’s a PDF (e.g., MIME type `application/pdf`) or docx.
        - Validate the file size (should not exceed 2MB).
        - Temporarily store the file in memory or process it directly (no persistence required).
      - Response:
