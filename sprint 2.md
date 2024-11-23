@@ -359,3 +359,175 @@
 
 ---
 
+## **2.3 Frontend Integration for Feedback Display**
+
+---
+
+### **Task 25**: Build Frontend Components to Display Fit Score and Feedback on the Dashboard
+
+- **Objective**:
+  - Create a responsive and user-friendly interface to display the fit score and actionable feedback.
+
+- **Technical Details**:
+  1. **Dashboard Layout**:
+     - Use a framework like React or Vue.js.
+     - Divide the dashboard into three sections:
+       - **Fit Score Visualization**: Display the fit score prominently using a progress bar, gauge chart, or numerical representation.
+       - **Matched Skills**: List the keywords or skills from the resume that align with the job description.
+       - **Improvement Suggestions**: Provide specific feedback on how to enhance the resume to better match the job description.
+  2. **Integration with Backend**:
+     - Fetch data from the `POST /api/fit-score` endpoint (defined in Task 24).
+     - Example API response:
+       ```json
+       {
+         "fit_score": 85,
+         "feedback": [
+           "Include experience with AWS services.",
+           "Add projects demonstrating REST API development."
+         ],
+         "matched_keywords": ["Python", "REST APIs", "AWS"]
+       }
+       ```
+     - Map this response to the dashboard sections.
+  3. **Visual Design**:
+     - Use libraries like Chart.js or D3.js for visualizations.
+     - Example Fit Score Visualization:
+       ```jsx
+       <ProgressBar value={fitScore} max={100} />
+       ```
+     - Example Feedback List:
+       ```jsx
+       <ul>
+         {feedback.map((item, index) => (
+           <li key={index}>{item}</li>
+         ))}
+       </ul>
+       ```
+  4. **User Experience Enhancements**:
+     - Include tooltips for feedback items with additional context.
+     - Highlight matched keywords within the resume.
+
+- **Unit Tests**:
+  - Mock API responses to test the rendering of fit scores, feedback, and matched keywords.
+  - Test for edge cases like missing or empty API data (e.g., no feedback).
+
+---
+
+### **Task 26**: Allow Users to Download a PDF Report of the Feedback and Recommendations
+
+- **Objective**:
+  - Provide users with the ability to download a detailed PDF report of their analysis results.
+
+- **Technical Details**:
+  1. **Backend Integration**:
+     - Fetch the same data used for the dashboard from `POST /api/fit-score`.
+  2. **Frontend Logic**:
+     - Use a library like jsPDF or PDFKit to generate a PDF report.
+     - Example Report Contents:
+       - **Header**: Application title and analysis date.
+       - **Fit Score Section**: Include a graphical representation (e.g., a gauge chart or numerical score).
+       - **Matched Keywords**: List the keywords from the resume that align with the job description.
+       - **Feedback Section**: Provide a detailed list of suggestions for improvement.
+     - Example Code Snippet (using jsPDF):
+       ```javascript
+       import jsPDF from 'jspdf';
+
+       function generatePDF(fitScore, matchedKeywords, feedback) {
+           const doc = new jsPDF();
+           doc.text("Resume Analysis Report", 10, 10);
+           doc.text(`Fit Score: ${fitScore}%`, 10, 20);
+           doc.text("Matched Keywords:", 10, 30);
+           matchedKeywords.forEach((keyword, index) => {
+               doc.text(`- ${keyword}`, 10, 40 + index * 10);
+           });
+           doc.text("Feedback:", 10, 60);
+           feedback.forEach((item, index) => {
+               doc.text(`- ${item}`, 10, 70 + index * 10);
+           });
+           doc.save("Resume_Analysis_Report.pdf");
+       }
+       ```
+  3. **Frontend Button**:
+     - Add a "Download Report" button to the dashboard that triggers the PDF generation.
+     - Example Button:
+       ```jsx
+       <button onClick={() => generatePDF(fitScore, matchedKeywords, feedback)}>
+         Download PDF Report
+       </button>
+       ```
+
+- **Unit Tests**:
+  - Validate the correct data is included in the generated PDF.
+  - Test PDF creation and download functionality.
+
+---
+
+### **Task 27**: Add Filtering Options for Users to Focus on Specific Feedback Categories
+
+- **Objective**:
+  - Allow users to filter feedback by categories such as skills, experience, and formatting.
+
+- **Technical Details**:
+  1. **Feedback Categorization**:
+     - Extend the backend API response to include categories for each feedback item:
+       ```json
+       {
+         "fit_score": 85,
+         "feedback": [
+           { "category": "skills", "text": "Include experience with AWS services." },
+           { "category": "experience", "text": "Add projects demonstrating REST API development." }
+         ]
+       }
+       ```
+  2. **Filter UI**:
+     - Add a dropdown or checkbox group to filter feedback:
+       ```jsx
+       <select onChange={(e) => setFilter(e.target.value)}>
+         <option value="all">All</option>
+         <option value="skills">Skills</option>
+         <option value="experience">Experience</option>
+       </select>
+       ```
+  3. **Filtering Logic**:
+     - Use a state variable to track the selected filter.
+     - Filter the feedback list dynamically based on the selected category:
+       ```jsx
+       const filteredFeedback = feedback.filter((item) =>
+         filter === "all" ? true : item.category === filter
+       );
+       ```
+
+- **Unit Tests**:
+  - Verify that selecting a filter updates the displayed feedback.
+  - Test edge cases, such as selecting a filter with no matching feedback.
+
+---
+
+### **Task 28**: Add Unit Tests to Validate the Correct Display of Feedback and Fit Scores
+
+- **Objective**:
+  - Ensure all components for displaying feedback and fit scores are thoroughly tested.
+
+- **Technical Details**:
+  1. **Component Tests**:
+     - Test the rendering of the fit score visualization:
+       - Input: A range of scores (e.g., 0%, 50%, 100%).
+       - Expected Output: Correct visualization for each score.
+     - Test the feedback list:
+       - Input: Various feedback arrays.
+       - Expected Output: All feedback items are rendered correctly.
+  2. **API Integration Tests**:
+     - Mock API calls to ensure the dashboard components correctly handle and display data.
+  3. **Filter Tests**:
+     - Test filtering functionality:
+       - Input: Feedback array with multiple categories.
+       - Expected Output: Only feedback matching the selected filter is displayed.
+  4. **Edge Cases**:
+     - Handle scenarios with missing or incomplete data:
+       - No fit score.
+       - Empty feedback list.
+
+- **Unit Testing Frameworks**:
+  - Use Jest and React Testing Library (if React) or Vue Test Utils (if Vue.js).
+
+---
