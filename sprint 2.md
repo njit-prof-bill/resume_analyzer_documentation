@@ -183,7 +183,6 @@
 
 ## **2.2 Implementing Fit Score Calculation and Feedback**
 
----
 
 ### **Task 21**: Develop Algorithms to Compare Resume Content with Job Description Requirements
 
@@ -362,7 +361,6 @@
 
 ## **2.3 Frontend Integration for Feedback Display**
 
----
 
 ### **Task 25**: Build Frontend Components to Display Fit Score and Feedback on the Dashboard
 
@@ -371,7 +369,7 @@
 
 - **Technical Details**:
   1. **Dashboard Layout**:
-     - Use a framework like React or Vue.js.
+     - Use the framework from the sprint 1 work.
      - Divide the dashboard into three sections:
        - **Fit Score Visualization**: Display the fit score prominently using a progress bar, gauge chart, or numerical representation.
        - **Matched Skills**: List the keywords or skills from the resume that align with the job description.
@@ -535,7 +533,6 @@
 
 ## **2.4 Final Testing and Debugging**
 
----
 
 ### **Task 29**: Perform End-to-End Testing of the Application, Covering the Entire Workflow
 
