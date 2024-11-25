@@ -31,10 +31,11 @@
 
 ---
 
-### **Task 18**: Develop a FastAPI Endpoint to Send Resume and Job Description to the NLP API
+### **Task 18**: Develop an API Endpoint to Send Resume and Job Description to the NLP API
 
 - **Objective**:
-  - Build a backend endpoint to connect with the NLP API and facilitate communication between the frontend and AI service.
+  - Build a backend endpoint to connect with the NLP API and facilitate communication between the frontend and AI service. 
+  Note: the examples here are illustrative and are not a copy and paste solution.
 
 - **Technical Details**:
   1. **Endpoint Definition**:
