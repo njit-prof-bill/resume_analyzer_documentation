@@ -191,7 +191,7 @@
 
 - **Technical Details**:
   1. **Input Data**:
-     - Resume text: String of extracted text from the uploaded PDF or pasted text.
+     - Resume text: String of extracted text from the uploaded PDF, docx, or pasted text.
      - Job description: String of job requirements, qualifications, and responsibilities.
      - Example Input:
        ```json
